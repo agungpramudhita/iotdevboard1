@@ -84,8 +84,8 @@ DynamicJsonDocument dhtData(1024);
   Login dan Password Access Point jaringan internet
   Sesuaikan nama WIFI dan PASSWORD Access Point Anda
   ----------------------------------------------------*/
-const char *wifiName = "od3ng";
-const char *wifiPass = "0d3n9bro";
+const char *wifiName = "JTI-POLINEMA";
+const char *wifiPass = "jtifast!";
 
 /*------------------------------------------------------------------------------
   Login dan Password ke Message Broker Mosquitto
@@ -94,7 +94,7 @@ const char *wifiPass = "0d3n9bro";
   ------------------------------------------------------------------------------*/
 const char *brokerUser = "AdminMQTT";
 const char *brokerPass = "pwd123";
-const char *brokerHost = "192.168.43.85";
+const char *brokerHost = "test.mosquitto.org";
 
 /*----------------------------------------------------
   Daftar nama Topic MQTT sebagai Publisher:
