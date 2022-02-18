@@ -84,17 +84,17 @@ DynamicJsonDocument dhtData(1024);
   Login dan Password Access Point jaringan internet
   Sesuaikan nama WIFI dan PASSWORD Access Point Anda
   ----------------------------------------------------*/
-const char *wifiName = "JTI-POLINEMA";
-const char *wifiPass = "jtifast!";
+const char *wifiName = "Smart Parking";
+const char *wifiPass = "5m4rT_P4rk!Ng";
 
 /*------------------------------------------------------------------------------
   Login dan Password ke Message Broker Mosquitto
   User dan Password harus sesuai dengan setting pada Mosquitto
   Alamat IP Message Broker harus disesuaikan, di sini menggunakan 192.168.0.101
   ------------------------------------------------------------------------------*/
-const char *brokerUser = "AdminMQTT";
-const char *brokerPass = "pwd123";
-const char *brokerHost = "test.mosquitto.org";
+const char *brokerUser = NULL;
+const char *brokerPass = NULL;
+const char *brokerHost = "192.168.0.101";
 
 /*----------------------------------------------------
   Daftar nama Topic MQTT sebagai Publisher:
@@ -461,7 +461,7 @@ void runningLED(animLED al, int tunda)
   MematikanSemuaLED();
   switch (al)
   {
-  //LED hidup dari kiri ke kanan
+  // LED hidup dari kiri ke kanan
   case AnimKiriKanan:
     for (uint8_t i = 0; i <= 8; i++)
     {
@@ -470,7 +470,7 @@ void runningLED(animLED al, int tunda)
     }
     break;
 
-  //LED hidup dari kanan ke kiri
+  // LED hidup dari kanan ke kiri
   case AnimKiriKananSendirian:
     for (uint8_t i = 0; i <= 8; i++)
     {
@@ -498,7 +498,7 @@ void runningLED(animLED al, int tunda)
     delay(tunda);
     break;
 
-  //LEH hidup dari samping ke tengah
+  // LEH hidup dari samping ke tengah
   case AnimSampingTengah:
     srChannel.set(0, HIGH);
     srChannel.set(8, HIGH);
@@ -560,7 +560,7 @@ void BacaKodeRemoteIR()
   ---------------------*/
 void MematikanSemuaLED()
 {
-  //Set seluruh kanal LED 0 - LED 8 menjadi OFF
+  // Set seluruh kanal LED 0 - LED 8 menjadi OFF
   for (uint8_t i = 0; i <= 8; i++)
   {
     srChannel.set(i, LOW);
@@ -721,7 +721,8 @@ void reconnect()
   {
     Serial.print("Attempting MQTT connection...");
     // Attempt to connect
-    if (client.connect("ESP8266Client", brokerUser, brokerPass))
+    if (client.connect("ESP8266Client"))
+    // if (client.connect("ESP8266Client", brokerUser, brokerPass))
     {
 
       Serial.println("connected");
