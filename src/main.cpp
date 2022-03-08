@@ -102,7 +102,7 @@ const char *wifiPass = "5m4rT_P4rk!Ng";
   ------------------------------------------------------------------------------*/
 const char *brokerUser = NULL;
 const char *brokerPass = NULL;
-const char *brokerHost = "192.168.0.109";
+const char *brokerHost = "192.168.0.105";
 // const char *brokerHost = "192.168.43.85";
 
 /*----------------------------------------------------
