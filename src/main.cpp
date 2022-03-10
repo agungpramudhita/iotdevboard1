@@ -1,5 +1,3 @@
-#include <Arduino.h>
-
 /*-----------------------------------------------
   IoT Smart Device Development Board
   by Dodit Suprianto | DSP-TECH
