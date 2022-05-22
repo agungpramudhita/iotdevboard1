@@ -1,3 +1,5 @@
+#include <Arduino.h>
+
 /*-----------------------------------------------
   IoT Smart Device Development Board
   by Dodit Suprianto | DSP-TECH
@@ -41,12 +43,6 @@
 #define MSG_BUFFER_SIZE (50)
 char msg[MSG_BUFFER_SIZE];
 DynamicJsonDocument dhtData(1024);
-String MAC, IP;
-
-// Timers auxiliar variables
-long now = millis();
-long lastMeasure = 0;
-int ldrSensor, src04 = 0;
 
 /*-------------------------------
   Alamat Kanal Shift Register:
@@ -88,12 +84,8 @@ int ldrSensor, src04 = 0;
   Login dan Password Access Point jaringan internet
   Sesuaikan nama WIFI dan PASSWORD Access Point Anda
   ----------------------------------------------------*/
-// const char *wifiName = "JTI-POLINEMA";
-// const char *wifiPass = "jtifast!";
 const char *wifiName = "Smart Parking";
 const char *wifiPass = "5m4rT_P4rk!Ng";
-// const char *wifiName = "od3ng";
-// const char *wifiPass = "0d3n9bro";
 
 /*------------------------------------------------------------------------------
   Login dan Password ke Message Broker Mosquitto
@@ -102,8 +94,7 @@ const char *wifiPass = "5m4rT_P4rk!Ng";
   ------------------------------------------------------------------------------*/
 const char *brokerUser = NULL;
 const char *brokerPass = NULL;
-const char *brokerHost = "192.168.21.238";
-// const char *brokerHost = "192.168.43.85";
+const char *brokerHost = "192.168.20.189";
 
 /*----------------------------------------------------
   Daftar nama Topic MQTT sebagai Publisher:
@@ -199,10 +190,6 @@ void setup()
   Serial.begin(115200);
   Wire.begin();
 
-  Serial.print("ESP Board MAC Address:  ");
-  MAC = WiFi.macAddress();
-  Serial.println(MAC);
-
   /*-------------------------
     Inisialisasi layar OLED
     -------------------------*/
@@ -266,8 +253,7 @@ void loop()
     reconnect();
   }
   client.loop();
-  dhtData["mac"] = MAC;
-  dhtData["ip"] = IP;
+
   /*-------------------------------
     Publish kode keypad Remote IR
     -------------------------------*/
@@ -279,11 +265,9 @@ void loop()
     --------------------------------------------------------*/
   if (TimerLDR.isReady())
   {
-    ldrSensor = SensorLDR();
-    dhtData["ldr"] = ldrSensor;
     // kirim data LDR ke message broker
-    // snprintf(msg, MSG_BUFFER_SIZE, "%d", SensorLDR());
-    // client.publish(outTopicLDR, msg);
+    snprintf(msg, MSG_BUFFER_SIZE, "%d", SensorLDR());
+    client.publish(outTopicLDR, msg);
 
     // update tampilan ke OLED setelah terjadi perubahan nilai
     updateOLED();
@@ -300,13 +284,11 @@ void loop()
     // Memanfaatkan memory buffer untuk mempercepat proses fetch data
     // dan  mengurangi waktu tunda saat data dikirim dari microcontroller
     // ke message broker MQTT mosquitto
-    src04 = SensorJarakUltraSonic();
-    dhtData["src04"] = src04;
-    // snprintf(msg, MSG_BUFFER_SIZE, "%d", SensorJarakUltraSonic());
+    snprintf(msg, MSG_BUFFER_SIZE, "%d", SensorJarakUltraSonic());
 
     // Kirim data yang berada di dalam memory buffer ke message broker
     // sesuai dengan topic yag telah ditentukan dengan peritah client.publish
-    // client.publish(outTopicSR04, msg);
+    client.publish(outTopicSR04, msg);
 
     // update tampilan ke OLED setelah terjadi perubahan nilai
     updateOLED();
@@ -334,34 +316,21 @@ void loop()
     // Format data dibah menjadi sebuah bentuk array.
     // Hal ini karena dalam satu siklus waktu sensor DHT11
     // menghasilkan 2 nilai sekaligus, yaitu suhu dan kelembaban
-    // dhtData["suhu"] = tempValid;
-    // dhtData["kelembaban"] = humValid;
+    dhtData["suhu"] = tempValid;
+    dhtData["kelembaban"] = humValid;
 
     // Untuk menghemat sumberdaya maka dalam sekali transmisi data ke message broker
     // nilai suhu dan kelembaban dikirim sekaligus, sehingga digunakan serialisasi data.
     // Format data semula berupa array menjadi format JSON dengan menggunakan fungsi serializeJson
-    // char buffer[256];
-    // size_t n = serializeJson(dhtData, buffer);
+    char buffer[256];
+    size_t n = serializeJson(dhtData, buffer);
 
     // Kirim data yang berada di dalam memory buffer ke message broker
     // sesuai dengan topic yag telah ditentukan dengan peritah client.publish
-    // client.publish(outTopicDHT, buffer, n);
+    client.publish(outTopicDHT, buffer, n);
 
     // Timer di-reset kembali ke counter 0
     TimerDHT.reset();
-  }
-  dhtData["temp"] = tempValid;
-  dhtData["hum"] = humValid;
-
-  now = millis();
-  if (now - lastMeasure > 5000)
-  {
-    char buffer[256];
-    size_t n = serializeJson(dhtData, buffer);
-    Serial.print("Data sensor: ");
-    Serial.println(buffer);
-    client.publish("/smk-data", buffer, n);
-    lastMeasure = now;
   }
 }
 
@@ -725,8 +694,7 @@ void KoneksiWIFI()
   Serial.println();
   Serial.println("WiFi connected");
   Serial.print("IP address: ");
-  IP = WiFi.localIP().toString();
-  Serial.println(IP);
+  Serial.println(WiFi.localIP());
 
   // Tampilkan informasi IP
   display.setCursor(0, 12);
@@ -753,8 +721,8 @@ void reconnect()
   {
     Serial.print("Attempting MQTT connection...");
     // Attempt to connect
-    // if (client.connect("ESP8266Client"))
-    if (client.connect(MAC.c_str(), brokerUser, brokerPass))
+    if (client.connect("ESP8266Client"))
+    // if (client.connect("ESP8266Client", brokerUser, brokerPass))
     {
 
       Serial.println("connected");
@@ -858,7 +826,7 @@ void updateOLED()
   display.setCursor(0, 0);
   display.print("Light");
   display.setCursor(75, 0);
-  display.print(String(ldrSensor));
+  display.print(String(SensorLDR()));
   display.setCursor(100, 0);
   display.print("Lux");
 
@@ -880,7 +848,7 @@ void updateOLED()
   display.setCursor(0, 42);
   display.print("Distance");
   display.setCursor(75, 42);
-  display.print(String(src04));
+  display.print(String(SensorJarakUltraSonic()));
   display.setCursor(100, 42);
   display.print("CM");
 
