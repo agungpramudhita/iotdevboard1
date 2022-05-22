@@ -88,6 +88,8 @@ int ldrSensor, src04 = 0;
   Login dan Password Access Point jaringan internet
   Sesuaikan nama WIFI dan PASSWORD Access Point Anda
   ----------------------------------------------------*/
+// const char *wifiName = "JTI-POLINEMA";
+// const char *wifiPass = "jtifast!";
 const char *wifiName = "Smart Parking";
 const char *wifiPass = "5m4rT_P4rk!Ng";
 // const char *wifiName = "od3ng";
