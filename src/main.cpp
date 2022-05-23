@@ -90,10 +90,12 @@ int ldrSensor, src04 = 0;
   ----------------------------------------------------*/
 // const char *wifiName = "JTI-POLINEMA";
 // const char *wifiPass = "jtifast!";
-const char *wifiName = "Smart Parking";
-const char *wifiPass = "5m4rT_P4rk!Ng";
+// const char *wifiName = "Smart Parking";
+// const char *wifiPass = "5m4rT_P4rk!Ng";
 // const char *wifiName = "od3ng";
 // const char *wifiPass = "0d3n9bro";
+const char *wifiName = "TP-Link_BA0E";
+const char *wifiPass = "90071126";
 
 /*------------------------------------------------------------------------------
   Login dan Password ke Message Broker Mosquitto
