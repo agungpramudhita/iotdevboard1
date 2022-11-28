@@ -86,8 +86,10 @@ DynamicJsonDocument dhtData(1024);
   ----------------------------------------------------*/
 // const char *wifiName = "Smart Parking";
 // const char *wifiPass = "5m4rT_P4rk!Ng";
-const char *wifiName = "TP-Link_BA0E";
-const char *wifiPass = "90071126";
+// const char *wifiName = "TP-Link_BA0E";
+// const char *wifiPass = "90071126";
+const char *wifiName = "JTI-POLINEMA";
+const char *wifiPass = "jtifast!";
 
 /*------------------------------------------------------------------------------
   Login dan Password ke Message Broker Mosquitto
@@ -96,7 +98,7 @@ const char *wifiPass = "90071126";
   ------------------------------------------------------------------------------*/
 const char *brokerUser = NULL;
 const char *brokerPass = NULL;
-const char *brokerHost = "192.168.0.107";
+const char *brokerHost = "192.168.74.32";
 
 /*----------------------------------------------------
   Daftar nama Topic MQTT sebagai Publisher:
