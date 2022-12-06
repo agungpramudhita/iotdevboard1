@@ -34,9 +34,9 @@ DynamicJsonDocument JSON(1024);
 // const char *wifiPass = "sugeng123";
 const char *wifiName = "JTI-POLINEMA";
 const char *wifiPass = "jtifast!";
-const char *brokerUser = "guest";
-const char *brokerPass = "guest";
-const char *brokerHost = "168.138.160.59"; // RabbitMQ
+const char *brokerUser = "semut";
+const char *brokerPass = "rangrang";
+const char *brokerHost = "192.168.60.37"; // tefa
 // const char *brokerHost = "168.168.74.32"; // MQTT
 // const char *brokerHost = "168.138.182.140"; // RabbitMQ
 
