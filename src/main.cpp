@@ -86,19 +86,23 @@ DynamicJsonDocument dhtData(1024);
   ----------------------------------------------------*/
 // const char *wifiName = "Smart Parking";
 // const char *wifiPass = "5m4rT_P4rk!Ng";
-// const char *wifiName = "TP-Link_BA0E";
-// const char *wifiPass = "90071126";
-const char *wifiName = "JTI-POLINEMA";
-const char *wifiPass = "jtifast!";
+// const char *wifiName = "JTI-TEFA";
+// const char *wifiPass = "12348765";
+// const char *wifiName = "JTI-POLINEMA";
+// const char *wifiPass = "jtifast!";
+const char *wifiName = "VEDC-POLINEMA";
+const char *wifiPass = "v3dc-p0L1n3m4";
 
 /*------------------------------------------------------------------------------
   Login dan Password ke Message Broker Mosquitto
   User dan Password harus sesuai dengan setting pada Mosquitto
   Alamat IP Message Broker harus disesuaikan, di sini menggunakan 192.168.0.101
   ------------------------------------------------------------------------------*/
+
 const char *brokerUser = NULL;
 const char *brokerPass = NULL;
-const char *brokerHost = "192.168.74.32";
+
+const char *brokerHost = "192.168.76.3";
 
 /*----------------------------------------------------
   Daftar nama Topic MQTT sebagai Publisher:
