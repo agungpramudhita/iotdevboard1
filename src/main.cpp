@@ -94,8 +94,10 @@ int ldrSensor, src04 = 0;
 // const char *wifiPass = "5m4rT_P4rk!Ng";
 // const char *wifiName = "od3ng";
 // const char *wifiPass = "0d3n9bro";
-const char *wifiName = "TP-Link_BA0E";
-const char *wifiPass = "90071126";
+// const char *wifiName = "TP-Link_BA0E";
+// const char *wifiPass = "90071126";
+const char *wifiName = "VEDC-POLINEMA";
+const char *wifiPass = "v3dc-p0L1n3m4";
 
 /*------------------------------------------------------------------------------
   Login dan Password ke Message Broker Mosquitto
@@ -104,7 +106,7 @@ const char *wifiPass = "90071126";
   ------------------------------------------------------------------------------*/
 const char *brokerUser = NULL;
 const char *brokerPass = NULL;
-const char *brokerHost = "192.168.0.101";
+const char *brokerHost = "192.168.1.102";
 // const char *brokerHost = "192.168.43.85";
 
 /*----------------------------------------------------
