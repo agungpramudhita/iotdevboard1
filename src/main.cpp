@@ -32,13 +32,20 @@ DynamicJsonDocument JSON(1024);
 
 // const char *wifiName = "Sugeng Pras";
 // const char *wifiPass = "sugeng123";
-const char *wifiName = "JTI-POLINEMA";
-const char *wifiPass = "jtifast!";
-const char *brokerUser = "semut";
-const char *brokerPass = "rangrang";
-const char *brokerHost = "192.168.60.37"; // tefa
+// const char *wifiName = "JTI-POLINEMA";
+// const char *wifiPass = "jtifast!";
+const char *wifiName = "VEDC-POLINEMA";
+const char *wifiPass = "v3dc-p0L1n3m4";
+// const char *brokerUser = "semut";
+// const char *brokerPass = "rangrang";
+// const char *brokerHost = "192.168.60.37"; // tefa
+const char *brokerUser = "vedc";
+const char *brokerPass = "vedc";
+const char *brokerHost = "192.168.1.102"; // vedc
+const uint16_t brokerPort = 1883;
 // const char *brokerHost = "168.168.74.32"; // MQTT
 // const char *brokerHost = "168.138.182.140"; // RabbitMQ
+String MAC;
 
 const char *outTopicJSON = "sensor";
 
@@ -97,10 +104,11 @@ void setup()
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.clearDisplay();
-
+  MAC = WiFi.macAddress();
+  Serial.println(MAC);
   KoneksiWIFI();
 
-  client.setServer(brokerHost, 1884);
+  client.setServer(brokerHost, brokerPort);
   client.setCallback(callback);
 
   PenerimaIR.enableIRIn();
@@ -507,7 +515,7 @@ void reconnect()
     Serial.print("Attempting MQTT connection...");
     // Attempt to connect
     //    if (client.connect("ESP8266Client", brokerUser, brokerPass, 0, 2, 0, 0))//jenis QoS = 2
-    if (client.connect("ESP8266Client", brokerUser, brokerPass))
+    if (client.connect(MAC.c_str(), brokerUser, brokerPass))
     {
 
       Serial.println("connected");
@@ -659,7 +667,7 @@ String msgJSON()
   payload += char(SensorJarakUltraSonic());
   payload += ",";
   payload += "\"MAC-Add\":";
-  payload += String(WiFi.macAddress());
+  payload += MAC;
   payload += "}";
   return payload;
 }
