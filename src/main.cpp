@@ -102,7 +102,7 @@ const char *wifiPass = "v3dc-p0L1n3m4";
 const char *brokerUser = NULL;
 const char *brokerPass = NULL;
 
-const char *brokerHost = "192.168.76.3";
+const char *brokerHost = "192.168.1.103";
 
 /*----------------------------------------------------
   Daftar nama Topic MQTT sebagai Publisher:
