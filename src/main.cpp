@@ -104,8 +104,8 @@ const char *wifiPass = "v3dc-p0L1n3m4";
   User dan Password harus sesuai dengan setting pada Mosquitto
   Alamat IP Message Broker harus disesuaikan, di sini menggunakan 192.168.0.101
   ------------------------------------------------------------------------------*/
-const char *brokerUser = NULL;
-const char *brokerPass = NULL;
+const char *brokerUser = "vedc";
+const char *brokerPass = "vedc";
 const char *brokerHost = "192.168.1.102";
 // const char *brokerHost = "192.168.43.85";
 
