@@ -39,10 +39,10 @@ const char *wifiPass = "v3dc-p0L1n3m4";
 // const char *brokerUser = "semut";
 // const char *brokerPass = "rangrang";
 // const char *brokerHost = "192.168.60.37"; // tefa
-const char *brokerUser = "vedc";
-const char *brokerPass = "vedc";
-const char *brokerHost = "192.168.1.102"; // vedc
-const uint16_t brokerPort = 1883;
+const char *brokerUser = "semut";
+const char *brokerPass = "rangrang";
+const char *brokerHost = "36.93.5.36"; // vedc
+const uint16_t brokerPort = 1884;
 // const char *brokerHost = "168.168.74.32"; // MQTT
 // const char *brokerHost = "168.138.182.140"; // RabbitMQ
 String MAC;
