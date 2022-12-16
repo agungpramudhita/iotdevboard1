@@ -106,7 +106,7 @@ const char *wifiPass = "v3dc-p0L1n3m4";
   ------------------------------------------------------------------------------*/
 const char *brokerUser = "vedc";
 const char *brokerPass = "vedc";
-const char *brokerHost = "192.168.1.102";
+const char *brokerHost = "192.168.1.104";
 // const char *brokerHost = "192.168.43.85";
 
 /*----------------------------------------------------
